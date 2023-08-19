@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "../Components/Header";
-import Player from "../Components/Player"
+import Player from "./Player2/Player"
 import Input from "../Components/Input";
 
 const Home = () => {
@@ -56,6 +56,11 @@ const Home = () => {
         );
     };
 
+    const handlePlayerDelete = (playerId) => {
+        const updatedPlayers = players.filter(player => player.id !== playerId)
+        setPlayers(updatedPlayers);
+    }
+
     return (
         <>
             <Header jucatori={players} />
@@ -66,6 +71,7 @@ const Home = () => {
                         return <Player key={pl.id} jucator={pl}
                             onIncrement={() => handleScoreChange(pl.id, true)}
                             onDecrement={() => handleScoreChange(pl.id, false)}
+                            onDelete={() => handlePlayerDelete(pl.id)}
                         />
                     })
                 }
